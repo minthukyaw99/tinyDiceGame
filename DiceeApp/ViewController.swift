@@ -31,13 +31,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func startRolling(_ sender: Any) {
+        self.runCounter()
+    }
+    
+    func runCounter()
+    {
         counter = 0;
         timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: (#selector(ViewController.updateDices)), userInfo: nil, repeats: true)
     }
     
-    
     func updateDices() {
-        print("counter is \(counter)")
+        
         let dice1 = Int(arc4random_uniform(6))
         let dice2 = Int(arc4random_uniform(6))
         self.diceOne.image = UIImage(named: dices[dice1])
@@ -48,6 +52,10 @@ class ViewController: UIViewController {
         }
         
         counter += 1;
+    }
+    
+    override func motionEnded(_ motion: UIEventSubtype, with event: UIEvent?) {
+        self.runCounter();
     }
     
 }
